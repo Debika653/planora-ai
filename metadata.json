@@ -1,0 +1,6 @@
+{
+  "name": "Planora AI — Smart Celebration & Event Planner",
+  "description": "Intelligent celebration and event workspace powered by Gemini. Plan weddings, birthdays, anniversaries, and community gatherings with budget management, timelines, vendor briefs, and task checklists.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

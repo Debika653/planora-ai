@@ -1,0 +1,979 @@
+# PROJECT: PLANORA AI — SMART CELEBRATION & EVENT PLANNER
+
+## 1. YOUR ROLE
+
+Act as a senior full-stack software engineer, AI application architect, UI/UX designer, security engineer, and software testing specialist.
+
+Build a complete, functional, responsive, production-quality web application named "Planora AI" for the PromptWars Challenge 5: Celebration & Event Planner.
+
+Do not build just a static landing page, a chatbot mockup, or a non-functional dashboard. Build an actual working application with real user interactions, meaningful business logic, AI-powered event planning, validation, error handling, and testing.
+
+The application must satisfy all six evaluation parameters:
+
+1. Code Quality
+2. Security
+3. Efficiency
+4. Testing
+5. Accessibility
+6. Problem Statement Alignment
+
+Prioritize correctness, reliability, maintainability, and functionality over unnecessary complexity.
+
+Do not claim that any feature works unless its implementation actually works.
+
+---
+
+## 2. PROBLEM STATEMENT
+
+People planning weddings, birthdays, anniversaries, college festivals, community gatherings, and other celebrations often struggle with:
+
+- Preparing and maintaining a realistic budget.
+- Creating a timeline for event preparation.
+- Finding and comparing suitable vendors.
+- Managing tasks and deadlines.
+- Organizing guests and event requirements.
+- Generating personalized themes, decorations, menus, and activity ideas.
+- Avoiding forgotten tasks and unnecessary expenses.
+- Coordinating all event information in one place.
+
+Planora AI solves these problems through an AI-powered event-planning workspace.
+
+Users provide their event details, budget, preferences, location, and requirements. The application uses Google's Gemini model to generate a personalized, structured event plan.
+
+The application then allows users to review and manage the generated plan through interactive dashboards, budget breakdowns, task checklists, vendor management, and downloadable reports.
+
+---
+
+## 3. TECHNOLOGY STACK
+
+Use a modern, reliable, maintainable technology stack.
+
+Frontend:
+- React.
+- Vite.
+- JavaScript with JSX.
+- Tailwind CSS, or a well-organized CSS implementation if Tailwind integration is unreliable.
+- React Router for navigation where appropriate.
+- Lucide React for consistent icons.
+- Recharts for charts only where they provide meaningful value.
+
+AI:
+- Google Gemini API.
+- Use the currently supported official Google GenAI JavaScript SDK.
+- Select a Gemini model that is actually available and supported by the configured API key.
+- Read the API key from an environment variable on the server.
+- Use structured JSON output where supported.
+- Validate all AI-generated data before displaying or storing it.
+
+Backend:
+- Node.js.
+- Express.js.
+- A separate backend service for AI requests and protected operations.
+
+Data storage:
+- MongoDB with Mongoose if persistent database functionality is implemented.
+- Keep database access behind a service or repository layer.
+- Provide a documented local development setup.
+- If the database is unavailable, provide a clearly identified local demo mode with graceful degradation instead of silently pretending that remote persistence works.
+
+Testing:
+- Vitest for frontend and utility tests.
+- React Testing Library for UI tests.
+- Supertest for backend API tests where appropriate.
+
+Use compatible, stable package versions and verify the generated project configuration.
+
+If the environment does not support a separate backend, implement the strongest supported architecture available, explain the limitation, and never expose a private Gemini API key in browser code.
+
+---
+
+## 4. APPLICATION DESIGN AND USER EXPERIENCE
+
+Create a polished, original, professional event-planning application.
+
+Visual direction:
+- Elegant, modern, welcoming, and premium.
+- Warm ivory or off-white backgrounds.
+- Deep plum or dark navy typography.
+- Muted lavender and coral accents.
+- Subtle gradients only where appropriate.
+- Rounded cards with restrained shadows.
+- Generous whitespace.
+- Clear typography hierarchy.
+- Consistent spacing, borders, and icon sizes.
+- Smooth, subtle transitions.
+- Beautiful but functional data visualizations.
+
+Do not create a generic AI-generated-looking dashboard filled with unnecessary gradients, excessive animations, meaningless statistics, or decorative elements.
+
+The interface must prioritize usability and clarity.
+
+Use a responsive layout that works on:
+- Mobile phones.
+- Tablets.
+- Laptops.
+- Desktop screens.
+
+Include:
+- A professional application header.
+- A clear navigation system.
+- A dashboard with meaningful event information.
+- Empty states for new users.
+- Loading states during AI requests.
+- Clear success and error messages.
+- Confirmation dialogs for destructive actions.
+- Helpful tooltips where needed.
+- A consistent button and form design system.
+
+Suggested application identity:
+
+Product name: Planora AI
+Tagline: Your celebration, perfectly planned.
+Primary action: Create My Event
+Secondary action: Explore Features
+
+---
+
+## 5. REQUIRED APPLICATION PAGES
+
+Implement the following pages and connect them through working navigation.
+
+### A. Landing Page
+
+Create a professional landing page containing:
+
+- Planora AI logo or wordmark.
+- Navigation links.
+- Hero section explaining the application.
+- A clear "Plan My Event" call-to-action.
+- Supported event categories.
+- Feature cards.
+- A sample event-plan preview.
+- A section explaining how the application works.
+- A clear footer.
+
+Supported event categories:
+1. Wedding.
+2. Birthday.
+3. Anniversary.
+4. College or corporate event.
+5. Community gathering.
+6. Custom celebration.
+
+The main call-to-action must open the event creation flow.
+
+Do not make navigation links or buttons decorative only.
+
+### B. Dashboard
+
+Create an interactive dashboard containing:
+
+- A welcome section.
+- An option to create a new event.
+- Saved events.
+- Upcoming event dates.
+- Task completion progress.
+- Budget utilization.
+- Outstanding tasks.
+- Quick actions.
+
+Calculate statistics from actual saved event data.
+
+Do not use fake numbers that look like real user data.
+
+When no events exist, show a useful empty state with a working event-creation button.
+
+Allow users to open, edit, and delete their saved events.
+
+### C. Event Creation Wizard
+
+Build a multi-step form with validation and a visible progress indicator.
+
+Collect the following information:
+
+Step 1: Event basics
+- Event name.
+- Event type.
+- Event date.
+- Event start time.
+- Event duration.
+- City or event location.
+- Indoor or outdoor preference.
+
+Step 2: Budget and attendees
+- Total budget.
+- Currency.
+- Expected number of guests.
+- Preferred spending priorities.
+- Budget flexibility.
+
+Step 3: Style and preferences
+- Event theme.
+- Preferred colors.
+- Style: elegant, traditional, modern, minimalist, festive, or custom.
+- Food preferences.
+- Dietary restrictions.
+- Accessibility requirements.
+- Special requests.
+
+Step 4: Logistics
+- Venue requirements.
+- Decoration requirements.
+- Catering requirements.
+- Photography or entertainment needs.
+- Vendor requirements.
+- Other important constraints.
+
+Step 5: Review
+- Display all entered information.
+- Allow the user to go back and edit.
+- Validate required fields.
+- Submit the information to generate the plan.
+
+Validation requirements:
+- Required fields must not be empty.
+- Budget must be a valid positive number.
+- Guest count must be a positive integer.
+- Dates must be valid.
+- Reject past event dates for newly created events.
+- Validate event duration and time inputs.
+- Prevent duplicate or accidental submissions.
+- Display understandable inline validation messages.
+- Preserve entered information when the user navigates between steps.
+
+The form must be fully functional on desktop and mobile.
+
+### D. AI Event Planning Engine
+
+This is the core feature of the application.
+
+Use the Gemini API to generate a personalized event plan from the user's actual form data.
+
+The generated plan must include:
+
+1. Event overview.
+2. Recommended event theme.
+3. Theme rationale.
+4. Color palette.
+5. Decoration suggestions.
+6. Venue recommendations by venue type.
+7. Suggested menu or catering approach.
+8. Entertainment and activity ideas.
+9. Budget breakdown.
+10. Preparation timeline.
+11. Task checklist.
+12. Vendor checklist.
+13. Guest-management suggestions.
+14. Logistics and contingency planning.
+15. Personalized recommendations.
+
+Make recommendations based on:
+- Event type.
+- Event date.
+- Location.
+- Budget.
+- Guest count.
+- User preferences.
+- Accessibility requirements.
+- Dietary restrictions.
+- Indoor or outdoor preference.
+
+Do not return the same generic plan for every event.
+
+If the user specifies a tight budget, recommend practical cost-saving options.
+
+If the user requests an outdoor event, include weather contingency planning.
+
+If the event is a wedding, prioritize ceremony logistics, catering, photography, guest coordination, and venue preparation.
+
+If the event is a birthday, prioritize theme, activities, cake, food, entertainment, and guest experience.
+
+For a college or community event, prioritize scheduling, crowd management, permissions where relevant, volunteer assignments, equipment, and contingency arrangements.
+
+Never invent confirmed vendor availability, real-time prices, reservations, or verified business details.
+
+Clearly distinguish estimated costs from verified prices.
+
+If information is missing, state reasonable assumptions instead of pretending to know unavailable facts.
+
+#### Structured AI output
+
+Request a structured JSON response using a schema similar to the following:
+
+{
+  "eventOverview": {
+    "title": "Event title",
+    "summary": "Personalized summary",
+    "theme": "Recommended theme",
+    "themeReason": "Reason for the recommendation",
+    "assumptions": []
+  },
+  "budget": {
+    "currency": "INR",
+    "totalBudget": 50000,
+    "estimatedTotal": 45000,
+    "remainingBudget": 5000,
+    "categories": [
+      {
+        "name": "Venue",
+        "estimatedCost": 10000,
+        "percentage": 20,
+        "reason": "Reason for allocation"
+      }
+    ]
+  },
+  "timeline": [
+    {
+      "title": "Book venue",
+      "dueDate": "YYYY-MM-DD",
+      "description": "Task details",
+      "priority": "high"
+    }
+  ],
+  "tasks": [
+    {
+      "title": "Confirm catering",
+      "description": "Confirm menu and guest count",
+      "category": "Catering",
+      "priority": "high",
+      "completed": false
+    }
+  ],
+  "vendors": [
+    {
+      "category": "Catering",
+      "requirements": "Requirements for a suitable vendor",
+      "estimatedBudget": 10000,
+      "selectionTips": []
+    }
+  ],
+  "recommendations": [
+    {
+      "title": "Personalized recommendation",
+      "description": "Practical suggestion",
+      "estimatedCost": 1000
+    }
+  ],
+  "contingencyPlan": [
+    {
+      "risk": "Bad weather",
+      "mitigation": "Arrange a covered alternative venue"
+    }
+  ]
+}
+
+Treat this schema as a design contract, not as permission to trust arbitrary AI output.
+
+Validate every field, type, array, date, numerical value, and enum before using the generated data.
+
+If the model returns malformed JSON or invalid fields, handle the error safely and provide a retry option.
+
+Never execute AI-generated JavaScript, HTML, SQL, or shell commands.
+
+Render AI-generated text as text, not executable HTML.
+
+Use reasonable limits on response size and generation requests.
+
+#### Budget calculation requirements
+
+The AI may suggest initial allocations, but the application's calculation logic must verify the final arithmetic.
+
+- All costs must be non-negative.
+- The budget currency must be consistent.
+- Estimated total must equal the sum of the category estimates.
+- Remaining budget must equal total budget minus estimated total.
+- Percentage allocations must be calculated from validated values.
+- Handle a zero total budget safely.
+- Flag overspending.
+- Warn when estimates exceed the user's budget.
+- Avoid displaying inconsistent AI-generated totals.
+
+Use deterministic application code for financial calculations rather than trusting the language model's arithmetic.
+
+### E. Event Plan Details Page
+
+After plan generation, show a complete event workspace.
+
+Create sections or tabs for:
+
+1. Overview.
+2. Budget.
+3. Timeline.
+4. Tasks.
+5. Vendors.
+6. Recommendations.
+7. Contingency plan.
+
+Overview:
+- Event details.
+- Theme.
+- Event date.
+- Guest count.
+- Budget summary.
+- Progress indicators.
+
+Budget:
+- Category breakdown.
+- Estimated costs.
+- Remaining budget.
+- Budget utilization chart.
+- Overspending warnings.
+
+Timeline:
+- Chronologically ordered milestones.
+- Due dates.
+- Task priorities.
+- Overdue indicators where appropriate.
+
+Tasks:
+- Interactive checkboxes.
+- Completion status.
+- Category filters.
+- Priority filters.
+- Progress calculation.
+- Add, edit, and delete task functionality.
+
+Vendors:
+- Vendor category.
+- Estimated allocation.
+- Requirements.
+- Selection checklist.
+- Contact notes.
+- Comparison notes.
+
+Do not imply that a vendor has been contacted or booked unless that action actually occurred.
+
+Recommendations:
+- Personalized ideas.
+- Estimated cost where meaningful.
+- Practical implementation tips.
+
+Contingency plan:
+- Potential risks.
+- Preventive measures.
+- Backup options.
+
+Allow users to update task status and event details without regenerating the entire plan.
+
+### F. AI Planning Assistant
+
+Provide a conversational assistant that understands the currently selected event.
+
+Example questions:
+- How can I reduce this event's budget by 15%?
+- Suggest affordable decoration alternatives.
+- Create a vegetarian menu for 100 guests.
+- What tasks should I complete this week?
+- Suggest a rain contingency plan.
+- Give me a more traditional wedding theme.
+- Reallocate my budget without exceeding the limit.
+
+The assistant must use the selected event's context.
+
+For budget changes, recalculate the affected allocations and validate the result.
+
+For plan modifications, show the proposed changes before applying them when they significantly affect existing data.
+
+Provide:
+- Loading indicators.
+- Error handling.
+- Retry functionality.
+- Clear conversation history controls.
+- A way to apply useful suggestions to the saved plan.
+
+Do not create fake AI responses when the Gemini request fails. Explain the error and let the user retry.
+
+### G. Vendor and Task Management
+
+Implement useful CRUD operations.
+
+Users should be able to:
+- Create a task.
+- Edit a task.
+- Delete a task.
+- Mark a task as complete.
+- Change task priority.
+- Add vendor requirements.
+- Update vendor notes.
+- Filter and search relevant items.
+
+Validate data before saving changes.
+
+Ask for confirmation before deleting important records.
+
+Keep changes synchronized with the event's saved data.
+
+### H. Export and Sharing
+
+Implement a functional way to export an event plan.
+
+Preferred features:
+- Downloadable, print-friendly event plan.
+- PDF export if supported by the installed libraries.
+- Print stylesheet.
+- Clear budget summary.
+- Timeline.
+- Task checklist.
+- Vendor checklist.
+- Contingency plan.
+
+Use actual event data in exports.
+
+If PDF generation is implemented, verify that the resulting file can be opened and that the content is readable.
+
+Do not display a successful download message unless the file has actually been generated.
+
+Sharing must not expose private event data through publicly accessible URLs by default.
+
+### I. Settings and Data Management
+
+Provide:
+- Basic application preferences.
+- Currency preference where appropriate.
+- Data export.
+- Clear-data confirmation.
+- A clear explanation of demo versus persistent storage.
+
+If authentication is implemented, protect private event records and enforce authorization on the backend.
+
+Do not implement fake authentication that merely changes the interface without protecting backend resources.
+
+---
+
+## 6. GEMINI API AND BACKEND SECURITY
+
+Security is mandatory.
+
+Implement the following protections:
+
+1. Never place a private Gemini API key in frontend JavaScript.
+2. Never commit secrets to source control.
+3. Read secrets from environment variables.
+4. Provide a .env.example file containing placeholder values only.
+5. Add real secret files to .gitignore.
+6. Route AI requests through the backend.
+7. Validate request bodies on the server.
+8. Apply sensible request-size limits.
+9. Implement rate limiting on AI endpoints.
+10. Apply request timeouts.
+11. Handle provider failures and quota errors.
+12. Return safe error messages without exposing stack traces or secrets.
+13. Validate and sanitize user-provided strings where appropriate.
+14. Prevent unsafe HTML rendering and cross-site scripting.
+15. Use parameterized database operations or safe ODM queries.
+16. Avoid unsafe dynamic evaluation.
+17. Configure CORS for the intended deployment origin.
+18. Do not trust client-supplied user IDs or authorization claims.
+19. If authentication is implemented, verify identity and ownership on every protected operation.
+20. Do not store passwords in plaintext.
+21. Do not log API keys, credentials, or unnecessary sensitive user data.
+22. Do not use client-side checks as the only security boundary.
+
+If there is no authentication system, do not pretend that the app provides secure multi-user private storage.
+
+For local demonstration, use a clearly identified demo mode with appropriate data limitations.
+
+Add clear setup instructions explaining how to configure the Gemini API key securely.
+
+---
+
+## 7. CODE QUALITY
+
+Organize the code into small, focused, reusable modules.
+
+Suggested structure:
+
+planora-ai/
+  client/
+    src/
+      components/
+      pages/
+      layouts/
+      hooks/
+      services/
+      utils/
+      schemas/
+      styles/
+      test/
+      App.jsx
+      main.jsx
+    package.json
+  server/
+    src/
+      routes/
+      controllers/
+      services/
+      middleware/
+      models/
+      validators/
+      utils/
+      app.js
+      server.js
+    package.json
+  tests/
+  .env.example
+  .gitignore
+  README.md
+
+Adjust the structure when necessary, but keep responsibilities separated.
+
+Requirements:
+- Use meaningful component names.
+- Keep components reasonably small.
+- Separate presentation from business logic.
+- Keep AI integration in a dedicated service.
+- Keep budget calculations in tested utility functions.
+- Keep validation logic reusable.
+- Avoid unnecessary code duplication.
+- Avoid giant components containing the entire application.
+- Avoid unnecessary global state.
+- Avoid excessive dependencies.
+- Use consistent formatting.
+- Remove unused imports and dead code.
+- Avoid console errors and warnings.
+- Handle loading, empty, success, and failure states.
+- Use descriptive error messages.
+- Use reusable form controls and UI components where appropriate.
+- Avoid unexplained magic numbers.
+- Do not suppress errors merely to make the application appear successful.
+
+Add comments where they explain important decisions rather than describing obvious code.
+
+---
+
+## 8. PERFORMANCE AND EFFICIENCY
+
+Implement practical performance optimizations.
+
+- Avoid unnecessary component re-renders.
+- Use stable keys when rendering lists.
+- Avoid repeated API calls for unchanged data.
+- Prevent duplicate submissions.
+- Debounce search inputs where appropriate.
+- Load large sections lazily if doing so provides a measurable benefit.
+- Avoid loading large libraries unnecessarily.
+- Keep AI prompts focused on the information needed.
+- Set appropriate request timeouts.
+- Limit AI response size.
+- Reuse data already available in application state.
+- Paginate or limit large lists when appropriate.
+- Avoid excessive database queries.
+- Add appropriate database indexes for common queries.
+- Avoid generating a new plan on every render or minor UI interaction.
+
+Do not introduce complicated caching or state-management systems without a real need.
+
+---
+
+## 9. ACCESSIBILITY
+
+Aim for WCAG 2.2 AA accessibility practices.
+
+Requirements:
+- Use semantic HTML.
+- Use correct heading hierarchy.
+- Label all form controls.
+- Associate validation errors with their fields.
+- Provide keyboard navigation.
+- Make interactive elements reachable using Tab and Shift+Tab.
+- Provide visible focus indicators.
+- Ensure dialogs can be operated using the keyboard.
+- Manage focus appropriately when dialogs open and close.
+- Give meaningful buttons accessible names.
+- Provide text alternatives for meaningful images.
+- Use sufficient text and interface contrast.
+- Do not communicate status using color alone.
+- Respect reduced-motion preferences.
+- Ensure charts have meaningful textual summaries.
+- Provide appropriate status announcements for asynchronous operations.
+- Ensure controls have practical touch targets.
+- Use descriptive link text.
+- Make forms understandable to screen-reader users.
+
+Do not use clickable div elements when semantic buttons or links are appropriate.
+
+Test keyboard navigation and correct accessible names.
+
+---
+
+## 10. TESTING AND VALIDATION
+
+Create real automated tests.
+
+Do not merely describe tests or display a checklist claiming that tests passed.
+
+### Unit tests
+
+Test:
+- Budget totals.
+- Remaining budget.
+- Percentage calculations.
+- Zero-budget handling.
+- Overspending detection.
+- Invalid numerical inputs.
+- Date validation.
+- Event form validation.
+- Task completion progress.
+- AI response schema validation.
+- Malformed AI responses.
+
+### Frontend tests
+
+Test:
+- Landing-page navigation.
+- Dashboard empty state.
+- Event creation form.
+- Validation messages.
+- Multi-step navigation.
+- Task completion.
+- Task filtering.
+- Event-plan rendering.
+- Loading states.
+- API failure states.
+- Keyboard-accessible controls.
+
+### Backend tests
+
+Test:
+- Valid AI-generation requests.
+- Invalid request bodies.
+- Missing required fields.
+- Oversized requests.
+- Rate limiting.
+- Provider errors.
+- Timeouts.
+- Malformed AI responses.
+- Unauthorized requests for protected resources.
+- Attempts to access another user's event when authentication is implemented.
+- Event creation and update validation.
+- Invalid task operations.
+
+Mock external Gemini API requests in automated tests where appropriate.
+
+Tests must not require a real API key just to verify deterministic application logic.
+
+### End-to-end verification
+
+Verify the principal user journey:
+
+1. Open the application.
+2. Navigate to event creation.
+3. Enter valid event information.
+4. Correct invalid inputs.
+5. Submit the event.
+6. Receive and validate an AI-generated plan.
+7. View the generated budget and timeline.
+8. Mark a task complete.
+9. Edit task information.
+10. Confirm that dashboard progress updates correctly.
+11. Save and reopen the event.
+12. Export or print the plan.
+13. Recover gracefully from an AI API failure.
+
+Do not report test results unless the tests have actually been executed.
+
+---
+
+## 11. PROBLEM STATEMENT ALIGNMENT
+
+Every major feature must directly support event planning.
+
+The core user journey must work:
+
+Event details
+    -> Input validation
+    -> Gemini-powered personalized planning
+    -> Structured plan validation
+    -> Budget and timeline generation
+    -> Task and vendor management
+    -> Saved event workspace
+    -> Exportable event plan
+
+The application must genuinely support:
+- Weddings.
+- Birthdays.
+- Community events.
+- Budgets.
+- Timelines.
+- Vendor checklists.
+- Personalized ideas.
+
+Avoid unrelated features such as social feeds, generic AI chatrooms, cryptocurrency, or unnecessary gamification.
+
+Prioritize the features explicitly requested in the challenge.
+
+---
+
+## 12. FAILURE HANDLING AND EDGE CASES
+
+Handle these situations correctly:
+
+- Gemini API key is missing.
+- API key is invalid.
+- Gemini API quota is exceeded.
+- The provider times out.
+- The network is unavailable.
+- The model returns malformed JSON.
+- The model returns incomplete information.
+- The model returns negative costs.
+- The model returns inconsistent budget totals.
+- The event date is invalid.
+- The event budget is zero.
+- Estimated expenses exceed the budget.
+- There are no saved events.
+- There are no tasks.
+- The database is unavailable.
+- A user tries to delete a record.
+- An export fails.
+- A user submits the same request repeatedly.
+
+Show actionable errors and preserve recoverable user input.
+
+Never silently discard important data.
+
+Never fabricate successful AI results, saved records, vendor bookings, or exports.
+
+---
+
+## 13. README AND PROJECT DOCUMENTATION
+
+Create a complete README.md containing:
+
+- Project name.
+- Problem statement.
+- Solution overview.
+- Main features.
+- Technology stack.
+- Application architecture.
+- Folder structure.
+- Prerequisites.
+- Installation instructions.
+- Environment-variable setup.
+- Gemini API configuration.
+- Database setup.
+- Development commands.
+- Testing commands.
+- Build commands.
+- Deployment guidance.
+- Security considerations.
+- Known limitations.
+- Troubleshooting instructions.
+
+Include the exact commands needed to install dependencies, start the backend, start the frontend, run tests, and build the application.
+
+Ensure the instructions match the actual generated files and scripts.
+
+---
+
+## 14. IMPLEMENTATION WORKFLOW
+
+Follow this sequence:
+
+Phase 1:
+Inspect the available environment and choose a compatible application architecture.
+
+Phase 2:
+Create the project structure, package configuration, and shared UI components.
+
+Phase 3:
+Implement the landing page, dashboard, event creation wizard, and responsive layouts.
+
+Phase 4:
+Implement the Gemini integration and structured event-plan generation.
+
+Phase 5:
+Implement budget calculations, timeline generation, task management, and vendor management.
+
+Phase 6:
+Implement event persistence and the documented demo fallback where appropriate.
+
+Phase 7:
+Implement secure backend validation, request controls, and safe error handling.
+
+Phase 8:
+Implement plan export or printing.
+
+Phase 9:
+Add automated tests for all critical logic and major user journeys.
+
+Phase 10:
+Run the available tests, resolve errors, and build the application.
+
+Phase 11:
+Review the application against every evaluation criterion.
+
+Do not stop after creating the landing page.
+
+Do not leave critical features as TODO comments, placeholder buttons, or fake data.
+
+If the project is too large to implement in one generation, prioritize a complete, working core experience first, then implement the remaining features without breaking the working application.
+
+---
+
+## 15. FINAL QUALITY GATE
+
+Before declaring the application complete, perform a systematic review.
+
+CODE QUALITY:
+- Modular code.
+- Consistent naming.
+- No unnecessary duplication.
+- No unused dependencies or imports.
+- No broken navigation.
+- No missing critical implementation.
+
+SECURITY:
+- No exposed private API keys.
+- Backend validation.
+- Safe error handling.
+- Request-size limits.
+- Rate limiting.
+- Secure database access.
+- Correct authorization wherever authentication is implemented.
+
+EFFICIENCY:
+- No unnecessary repeated requests.
+- No duplicate AI submissions.
+- Reasonable response limits.
+- Efficient rendering and data handling.
+
+TESTING:
+- Real unit tests.
+- Frontend interaction tests.
+- Backend validation tests.
+- Error-path tests.
+- Successful production build.
+
+ACCESSIBILITY:
+- Semantic HTML.
+- Keyboard navigation.
+- Visible focus states.
+- Accessible forms.
+- Appropriate contrast.
+- Accessible asynchronous feedback.
+
+PROBLEM STATEMENT ALIGNMENT:
+- Personalized event-plan generation.
+- Working budget breakdown.
+- Working timeline.
+- Interactive task checklist.
+- Vendor requirements.
+- Useful recommendations.
+- Saved event workspace.
+- Export or print functionality.
+
+Fix all discovered critical errors before finishing.
+
+Do not invent a score or claim a perfect evaluation result.
+
+At the end, provide:
+1. A summary of implemented features.
+2. The actual project structure.
+3. Installation and execution commands.
+4. Required environment variables.
+5. Automated test results, distinguishing executed tests from unexecuted tests.
+6. Build results.
+7. Known limitations.
+8. A six-parameter self-audit identifying any incomplete requirements.
+
+The final result must be a functional, polished, secure-by-design, accessible, efficient, tested, and problem-aligned event-planning application.

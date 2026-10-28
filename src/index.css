@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --bg-ivory: #FAF8F5;
+    --bg-card: #FFFFFF;
+    --color-plum: #2D142C;
+    --color-plum-dark: #1E0D1E;
+    --color-coral: #E06D53;
+    --color-coral-light: #FA8F79;
+    --color-lavender: #7C699E;
+    --color-lavender-subtle: #F2EEF9;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-ivory);
+    color: var(--color-plum);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, .font-display {
+    font-family: var(--font-serif);
+  }
+}
+
+/* Print stylesheet for clean, high-fidelity export */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #111111 !important;
+  }
+
+  header, nav, .no-print, button:not(.print-include) {
+    display: none !important;
+  }
+
+  .print-page {
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .page-break-inside-avoid {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}
